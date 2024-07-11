@@ -12,11 +12,11 @@
       <input type="text" title="Name" placeholder="John Doe" />
       <div style="display: flex; flex-direction: row; gap: 15px">
         <div>Select Difficulty</div>
-        <select name="Difficulty" id="difficultyDropdown">
-          <option value="0">Infant</option>
-          <option value="1">Child</option>
-          <option value="2">Man</option>
-          <option value="4">God</option>
+        <select name="Difficulty" id="difficultyDropdown" required>
+          <option value="infantDifficulty">Infant</option>
+          <option value="childDifficulty">Child</option>
+          <option value="manDifficulty">Man</option>
+          <option value="godDifficulty">God</option>
         </select>
       </div>
     </form>
@@ -30,7 +30,12 @@
           difficultyDrowdownElement[difficultyDrowdownElement.selectedIndex]
             .value
         ); // REF1
-        window.location.href = "./games/childDifficulty/game.html";
+
+        const difficulty =
+          difficultyDrowdownElement[difficultyDrowdownElement.selectedIndex]
+            .value;
+
+        window.location.href = `./games/${difficulty}/game.html`;
       });
     </script>
   </body>

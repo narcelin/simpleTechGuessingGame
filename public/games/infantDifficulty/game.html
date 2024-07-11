@@ -7,11 +7,30 @@
     <title>Technology Game</title>
   </head>
   <body>
+    <div
+      style="display: flex; flex-direction: row; gap: 15px; min-width: 125px"
+    >
+      <div>CLOCK:</div>
+      <div id="clockValue">0</div>
+    </div>
+    <div
+      style="display: flex; flex-direction: row; gap: 15px; min-width: 125px"
+    >
+      <div>SCORE:</div>
+      <!-- ISSUE: If score value is below 4 then correct answer points will not add to it. Issue with parseInt? -->
+      <!-- For now, we will start with 20 points -->
+      <div id="scoreValue">20</div>
+    </div>
+
     <div class="image-container">
       <img id="tech-image" src="" alt="Technology Image" />
     </div>
     <div class="technology-name" id="tech-name">GUESS THE NAME</div>
-    <button id="next-btn">Next</button>
+    <!-- <button id="next-btn">Next</button> -->
+    <div style="display: flex; gap: 25px">
+      <button id="optionBtn1">Option 1</button>
+      <button id="optionBtn2">Option 2</button>
+    </div>
 
     <script src="app.js"></script>
   </body>
