@@ -9,33 +9,43 @@
   <body>
     <h1>Welcome to Tech Guesser</h1>
     <form action="" style="display: flex; flex-direction: column; gap: 15px">
-      <input type="text" title="Name" placeholder="John Doe" />
       <div style="display: flex; flex-direction: row; gap: 15px">
-        <div>Select Difficulty</div>
+        <label>Enter Player Name : </label>
+        <input
+          id="playerNameInput"
+          type="text"
+          title="Name"
+          placeholder="John Doe"
+        />
+      </div>
+      <div style="display: flex; flex-direction: row; gap: 15px">
+        <div>Select Difficulty :</div>
         <select name="Difficulty" id="difficultyDropdown" required>
           <option value="infantDifficulty">Infant</option>
           <option value="childDifficulty">Child</option>
           <option value="manDifficulty">Man</option>
-          <option value="godDifficulty">God</option>
         </select>
       </div>
     </form>
     <button id="startBtn">Click Here To Start</button>
     <script>
       const startBtnElement = document.getElementById("startBtn");
+      const playerNameInputElement = document.getElementById("playerNameInput");
+
       const difficultyDrowdownElement =
         document.getElementById("difficultyDropdown");
-      startBtnElement.addEventListener("click", () => {
-        console.log(
-          difficultyDrowdownElement[difficultyDrowdownElement.selectedIndex]
-            .value
-        ); // REF1
 
+      startBtnElement.addEventListener("click", () => {
         const difficulty =
           difficultyDrowdownElement[difficultyDrowdownElement.selectedIndex]
             .value;
 
-        window.location.href = `./games/${difficulty}/game.html`;
+        let playerName = playerNameInputElement.value;
+        if (playerName == "") {
+          playerName = "Skywalker";
+        }
+
+        window.location.href = `./games/${difficulty}/game.html?playerName=${playerName}`;
       });
     </script>
   </body>

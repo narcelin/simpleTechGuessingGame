@@ -182,7 +182,6 @@ const technologies = [
 ];
 
 app.get("/answer", (req, res) => {
-  console.log("REQUEST TO SERVER", req.query.techId);
   const techId = parseInt(req.query.techId);
 
   const data = technologies.find((tech) => tech.techId === techId);

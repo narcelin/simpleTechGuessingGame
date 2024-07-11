@@ -4,11 +4,25 @@ setInterval(function () {
   clockValueElement.innerHTML = parseInt(clockValueElement.innerHTML) + 1;
 }, 1000);
 
+// Creating tech id list to randomize technologies
+let int = 1;
+let technologyIds = [];
+while (technologyIds.length < 25) {
+  technologyIds.push(int);
+  int = int + 1; //int++ gives me a weird error. Skips int = 5
+}
+
+let techId;
+function randomizeTechId() {
+  const techIdIndex = Math.ceil(Math.random() * (technologyIds.length - 1));
+  techId = technologyIds[techIdIndex];
+  technologyIds = technologyIds.filter((id) => id !== techId);
+}
+randomizeTechId();
+
 const scoreValueElement = document.getElementById("scoreValue");
 const correctAnswerPoints = 1; // This value will change depending on difficulty
 
-let currentIndex = 0;
-let techId = currentIndex + 1;
 let revealTechName = false;
 let answer = "";
 
@@ -40,7 +54,7 @@ async function setOptions() {
 
   const response = await fetch(`http://localhost:3000/answer?techId=${techId}`);
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   answer = data.technology;
 
   if (Math.floor(Math.random() * 2)) {
@@ -57,8 +71,16 @@ async function correctAnswerChosen() {
   scoreValueElement.innerHTML =
     parseInt(scoreValueElement.innerHTML) + correctAnswerPoints;
 
-  if (techId >= 25) {
-    window.location.href = "./../endGame.html";
+  if (technologyIds.length == 0) {
+    const finalScore = scoreValueElement.innerHTML;
+
+    // Get player name from URL
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    const params = new URLSearchParams(url.search);
+    const playerName = params.get("playerName");
+
+    window.location.href = `./../endGame.html?score=${finalScore}&playerName=${playerName}`;
     console.log("END GAME");
     return;
   }
@@ -66,11 +88,12 @@ async function correctAnswerChosen() {
   // Change for next technology. Will need to adapt this to randomise
   // For now I will keep it simple
   // techId++;
-  techId = 25;
+  randomizeTechId();
   const response = await fetch(`http://localhost:3000/answer?techId=${techId}`);
   const data = await response.json();
   if (!response.ok) {
-    console.log("Response not okay code heres");
+    console.log("technologyIds: ", technologyIds);
+    console.log("techId: ", techId);
   }
   imageElement.src = data.image;
   setOptions();

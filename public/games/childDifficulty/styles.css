@@ -26,7 +26,6 @@ body {
   font-size: 49px; /* increased font size */
   min-width: 250px;
   min-height: 50px;
-  border: 10px solid black;
 }
 
 button {
