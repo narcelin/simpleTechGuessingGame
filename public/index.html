@@ -1,18 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Technology Game</title>
-</head>
-<body>
-    <div class="image-container">
-        <img id="tech-image" src="" alt="Technology Image" style="opacity: 0;">
-    </div>
-    <div class="technology-name" id="tech-name"></div>
-    <button id="next-btn">Next</button>
-
-    <script src="app.js"></script>
-</body>
+  </head>
+  <body>
+    <h1>Welcome to Tech Guesser</h1>
+    <form action="" style="display: flex; flex-direction: column; gap: 15px">
+      <input type="text" title="Name" placeholder="John Doe" />
+      <div style="display: flex; flex-direction: row; gap: 15px">
+        <div>Select Difficulty</div>
+        <select name="Difficulty" id="difficultyDropdown">
+          <option value="0">Infant</option>
+          <option value="1">Child</option>
+          <option value="2">Man</option>
+          <option value="4">God</option>
+        </select>
+      </div>
+    </form>
+    <button id="startBtn">Click Here To Start</button>
+    <script>
+      const startBtnElement = document.getElementById("startBtn");
+      const difficultyDrowdownElement =
+        document.getElementById("difficultyDropdown");
+      startBtnElement.addEventListener("click", () => {
+        console.log(
+          difficultyDrowdownElement[difficultyDrowdownElement.selectedIndex]
+            .value
+        ); // REF1
+        window.location.href = "./games/childDifficulty/game.html";
+      });
+    </script>
+  </body>
 </html>
