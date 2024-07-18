@@ -21,32 +21,15 @@
       <div style="display: flex; flex-direction: row; gap: 15px">
         <div>Select Difficulty :</div>
         <select name="Difficulty" id="difficultyDropdown" required>
-          <option value="infantDifficulty">Infant</option>
-          <option value="childDifficulty">Child</option>
-          <option value="manDifficulty">Man</option>
+          <option value="easyDifficulty">Easy</option>
+          <option value="normalDifficulty">Normal</option>
+          <option value="difficultDifficulty">Difficult</option>
+          <option value="impossibleDifficulty">Impossible</option>
         </select>
       </div>
     </form>
     <button id="startBtn">Click Here To Start</button>
-    <script>
-      const startBtnElement = document.getElementById("startBtn");
-      const playerNameInputElement = document.getElementById("playerNameInput");
-
-      const difficultyDrowdownElement =
-        document.getElementById("difficultyDropdown");
-
-      startBtnElement.addEventListener("click", () => {
-        const difficulty =
-          difficultyDrowdownElement[difficultyDrowdownElement.selectedIndex]
-            .value;
-
-        let playerName = playerNameInputElement.value;
-        if (playerName == "") {
-          playerName = "Skywalker";
-        }
-
-        window.location.href = `./games/${difficulty}/game.html?playerName=${playerName}`;
-      });
-    </script>
+    <button id="testBtn">TEST</button>
+    <script src="./script.js"></script>
   </body>
 </html>

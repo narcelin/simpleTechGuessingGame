@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
 
 const app = express();
 const PORT = 3000;
@@ -191,4 +192,25 @@ app.get("/answer", (req, res) => {
   } else {
     res.status(404).json({ error: "Technology not found" });
   }
+});
+
+// Supabase
+const { createClient } = require("@supabase/supabase-js");
+
+const supabaseKey = process.env.SUPABASE_KEY;
+const supabaseUrl = process.env.SUPABASE_URL;
+console.log("SUPABASE URL:", supabaseUrl);
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Supabase API
+
+app.get("/supabaseAPI", async (req, res) => {
+  const { data, error } = await supabase.from("ScoreBoard").select();
+  console.log("SUPABASE DATA: ", data);
+  res.send(data);
+});
+
+app.post("/supabaseAPI", async (req, res) => {
+  const { score, playerName } = await req.body;
+  console.log(score);
 });

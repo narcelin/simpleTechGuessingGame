@@ -146,29 +146,3 @@ optionBtn3Element.addEventListener("click", async () => {
     alert("Wrong, try again");
   }
 });
-
-// OLD
-// document.getElementById("next-btn").addEventListener("click", async () => {
-//   console.log("next button clicked");
-//   const tech = technologies[currentIndex];
-
-//   if (revealTechName) {
-//     techNameElement.innerHTML = "";
-//     imageElement.src = tech.image;
-//     revealTechName = false;
-//   } else {
-//     const techId = currentIndex + 1;
-//     const response = await fetch(
-//       `http://localhost:3000/answer?techId=${techId}`
-//     );
-//     const data = await response.json();
-//     console.log(data.technology);
-
-//     if (currentIndex < technologies.length) {
-//       techNameElement.innerHTML = await data.technology;
-
-//       currentIndex++;
-//       revealTechName = true;
-//     }
-//   }
-// });
