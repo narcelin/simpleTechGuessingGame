@@ -53,5 +53,5 @@ startBtnElement.addEventListener("click", () => {
     playerName = "Skywalker";
   }
 
-  window.location.href = `./games/${difficulty}/game.html?playerName=${playerName}`;
+  window.location.href = `./games/${difficulty}/game.html?playerName=${playerName}&difficulty=${difficulty}`;
 });

@@ -6,30 +6,26 @@ const score = params.get("score");
 const playerName = params.get("playerName");
 
 // Example usage
-console.log("Current URL:", currentUrl);
-console.log("Value of paramName:", playerName);
+// console.log("Current URL:", currentUrl);
+// console.log("Value of paramName:", playerName);
 
-const heading1Element = document.getElementById("heading1");
 const scoreElement = document.getElementById("score");
 
-heading1Element.innerHTML = `Congradulations, ${playerName} for finishing the game!`;
-scoreElement.innerHTML = `You scored a total of ${score} points!`;
+scoreElement.innerHTML = `${playerName} scored a total of ${score} points!`;
 
-try {
-  console.log("RUNNING POST TRY BLOCK");
-  const response = await fetch("http://localhost:3000/supabaseAPI", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ score, playerName }),
+//Pulling scoreboard data from Supabase
+const data = fetch("http://localhost:3000/supabaseAPI")
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((data) => {
+      const scoreboardRow = document.createElement("tr");
+      scoreboardRow.innerHTML = `
+            <td>${data.player_name}</td>
+            <td>${data.score}</td>
+            <td>${data.difficulty}</td>
+            <td>${data.created_at}</td>
+        `;
+      document.getElementById("scoreboardTableBody").appendChild(scoreboardRow);
+      console.log(data);
+    });
   });
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  const data = await response.json();
-  console.log(data);
-} catch (error) {
-  console.error("Error posting data:", error);
-}

@@ -1,11 +1,13 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const bodyParser = require("body-parser");
 
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
+app.use(bodyParser.json());
 app.use(express.static("public"));
 
 app.listen(PORT, () => {
@@ -211,6 +213,13 @@ app.get("/supabaseAPI", async (req, res) => {
 });
 
 app.post("/supabaseAPI", async (req, res) => {
-  const { score, playerName } = await req.body;
-  console.log(score);
+  const { finalScore, playerName, difficulty } = await req.body;
+  const { data, error } = await supabase
+    .from("ScoreBoard")
+    .insert({
+      score: finalScore,
+      player_name: playerName,
+      difficulty: difficulty,
+    });
+  console.log(data);
 });
