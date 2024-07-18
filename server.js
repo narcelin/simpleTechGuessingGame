@@ -201,25 +201,26 @@ const { createClient } = require("@supabase/supabase-js");
 
 const supabaseKey = process.env.SUPABASE_KEY;
 const supabaseUrl = process.env.SUPABASE_URL;
-console.log("SUPABASE URL:", supabaseUrl);
+// console.log("SUPABASE URL:", supabaseUrl);
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Supabase API
 
 app.get("/supabaseAPI", async (req, res) => {
-  const { data, error } = await supabase.from("ScoreBoard").select();
-  console.log("SUPABASE DATA: ", data);
+  const { data, error } = await supabase
+    .from("ScoreBoard")
+    .select()
+    .order("score", { ascending: false });
+  // console.log("SUPABASE DATA: ", data);
   res.send(data);
 });
 
 app.post("/supabaseAPI", async (req, res) => {
   const { finalScore, playerName, difficulty } = await req.body;
-  const { data, error } = await supabase
-    .from("ScoreBoard")
-    .insert({
-      score: finalScore,
-      player_name: playerName,
-      difficulty: difficulty,
-    });
-  console.log(data);
+  const { data, error } = await supabase.from("ScoreBoard").insert({
+    score: finalScore,
+    player_name: playerName,
+    difficulty: difficulty,
+  });
+  // console.log(data);
 });

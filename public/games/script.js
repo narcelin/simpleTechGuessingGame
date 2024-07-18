@@ -26,6 +26,6 @@ const data = fetch("http://localhost:3000/supabaseAPI")
             <td>${data.created_at}</td>
         `;
       document.getElementById("scoreboardTableBody").appendChild(scoreboardRow);
-      console.log(data);
+      // console.log(data);
     });
   });

@@ -12,7 +12,7 @@ startBtnElement.addEventListener("click", () => {
     playerName = "Skywalker";
   }
 
-  console.log(difficulty);
+  // console.log(difficulty);
 
   window.location.href = `./games/${difficulty}/game.html?playerName=${playerName}&difficulty=${difficulty}`;
 });

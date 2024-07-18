@@ -1,11 +1,11 @@
 const scoreValueElement = document.getElementById("scoreValue");
-const correctAnswerPoints = 3; // This value will change depending on difficulty
+const correctAnswerPoints = 1; // This value will change depending on difficulty
 
 // CLOCK
 const clockValueElement = document.getElementById("clockValue");
 setInterval(function () {
   clockValueElement.innerHTML = parseInt(clockValueElement.innerHTML) + 1;
-  scoreValueElement.innerHTML = parseInt(scoreValueElement.innerHTML) - 1;
+  scoreValueElement.innerHTML = parseInt(scoreValueElement.innerHTML) - 0;
 }, 1000);
 
 // Creating tech id list to randomize technologies
