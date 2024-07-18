@@ -1,11 +1,11 @@
 const scoreValueElement = document.getElementById("scoreValue");
-const correctAnswerPoints = 3; // This value will change depending on difficulty
+const correctAnswerPoints = 1; // This value will change depending on difficulty
 
 // CLOCK
 const clockValueElement = document.getElementById("clockValue");
 setInterval(function () {
   clockValueElement.innerHTML = parseInt(clockValueElement.innerHTML) + 1;
-  scoreValueElement.innerHTML = parseInt(scoreValueElement.innerHTML) - 1;
+  scoreValueElement.innerHTML = parseInt(scoreValueElement.innerHTML) - 0; //Easy mode
 }, 1000);
 
 // Creating tech id list to randomize technologies
@@ -32,6 +32,7 @@ const techNameElement = document.getElementById("tech-name");
 
 const optionBtn1Element = document.getElementById("optionBtn1");
 const optionBtn2Element = document.getElementById("optionBtn2");
+const optionBtn3Element = document.getElementById("optionBtn3");
 
 async function setFirstImg() {
   const response = await fetch(`http://localhost:3000/answer?techId=${techId}`);
@@ -40,6 +41,15 @@ async function setFirstImg() {
   imageElement.src = data.image;
 }
 setFirstImg();
+
+async function getRandomTechName() {
+  const randomNumber0To25 = Math.ceil(Math.random() * 25);
+  const randomTechNameResponse = await fetch(
+    `http://localhost:3000/answer?techId=${randomNumber0To25}`
+  );
+  const randomTechName = await randomTechNameResponse.json();
+  return randomTechName.technology;
+}
 
 // Sets innerHTML content for the buttons
 // Wont be able to tell the answer once I shuffle techId and its corresponding image
@@ -58,12 +68,25 @@ async function setOptions() {
   // console.log(data);
   answer = data.technology;
 
-  if (Math.floor(Math.random() * 2)) {
-    optionBtn1Element.innerHTML = randomTechName.technology;
-    optionBtn2Element.innerHTML = data.technology;
-  } else {
-    optionBtn1Element.innerHTML = data.technology;
-    optionBtn2Element.innerHTML = randomTechName.technology;
+  switch (Math.ceil(Math.random() * 3)) {
+    case 1:
+      optionBtn1Element.innerHTML = data.technology;
+      optionBtn2Element.innerHTML = await getRandomTechName();
+      optionBtn3Element.innerHTML = await getRandomTechName();
+      break;
+    case 2:
+      optionBtn1Element.innerHTML = await getRandomTechName();
+      optionBtn2Element.innerHTML = data.technology;
+      optionBtn3Element.innerHTML = await getRandomTechName();
+      break;
+    case 3:
+      optionBtn1Element.innerHTML = await getRandomTechName();
+      optionBtn2Element.innerHTML = await getRandomTechName();
+      optionBtn3Element.innerHTML = data.technology;
+      break;
+    default:
+      console.error("Oh no something is wrong. Good luck trying to find it");
+      break;
   }
 }
 setOptions();
@@ -141,28 +164,10 @@ optionBtn2Element.addEventListener("click", async () => {
   }
 });
 
-// OLD
-// document.getElementById("next-btn").addEventListener("click", async () => {
-//   console.log("next button clicked");
-//   const tech = technologies[currentIndex];
-
-//   if (revealTechName) {
-//     techNameElement.innerHTML = "";
-//     imageElement.src = tech.image;
-//     revealTechName = false;
-//   } else {
-//     const techId = currentIndex + 1;
-//     const response = await fetch(
-//       `http://localhost:3000/answer?techId=${techId}`
-//     );
-//     const data = await response.json();
-//     console.log(data.technology);
-
-//     if (currentIndex < technologies.length) {
-//       techNameElement.innerHTML = await data.technology;
-
-//       currentIndex++;
-//       revealTechName = true;
-//     }
-//   }
-// });
+optionBtn3Element.addEventListener("click", async () => {
+  if (optionBtn3Element.innerHTML == answer) {
+    correctAnswerChosen();
+  } else {
+    alert("Wrong, try again");
+  }
+});
