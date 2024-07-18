@@ -72,7 +72,7 @@ async function correctAnswerChosen() {
   scoreValueElement.innerHTML =
     parseInt(scoreValueElement.innerHTML) + correctAnswerPoints;
 
-  if (technologyIds.length == 24) {
+  if (technologyIds.length == 0) {
     const finalScore = scoreValueElement.innerHTML;
 
     // Get player name from URL
