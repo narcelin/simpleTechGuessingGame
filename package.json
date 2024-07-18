@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"nodemon server.js\" \"sleep 2 && open public/index.html\""
+    "start": "nodemon server.js",
+    "start-concurrently": "concurrently \"nodemon server.js\" \"sleep 2 && open public/index.html\""
   },
   "keywords": [],
   "author": "",

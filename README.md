@@ -4,9 +4,10 @@ Lets test your skills with this simple games
 
 ## How To Run Game
 
-Run the following script
-
 - npm run start
+  Starts the server
+
+Then open the HTML using live server through VSCode
 
 ## Difficulty Information
 
